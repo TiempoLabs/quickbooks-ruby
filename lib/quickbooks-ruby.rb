@@ -103,6 +103,7 @@ require 'quickbooks/service/estimate'
 require 'quickbooks/service/tax_rate'
 require 'quickbooks/service/tax_code'
 require 'quickbooks/service/batch'
+require 'quickbooks/service/cdc'
 
 module Quickbooks
   @@logger = nil

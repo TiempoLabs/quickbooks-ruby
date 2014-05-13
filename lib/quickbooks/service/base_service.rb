@@ -50,8 +50,8 @@ module Quickbooks
         query = "#{query} STARTPOSITION #{start_position} MAXRESULTS #{max_results}"
 
         "#{url_for_base}/query?query=#{URI.encode_www_form_component(query)}"
-      end
-
+      end      
+ 
       private
 
       def parse_xml(xml)
@@ -86,14 +86,17 @@ module Quickbooks
         parse_collection(response, model)
       end
 
-      def parse_collection(response, model)
+      def parse_collection(response, model, xml=nil)
         if response
           collection = Quickbooks::Collection.new
-          xml = @last_response_xml
+          if (!xml)
+            xml = @last_response_xml
+          end
+
           begin
             results = []
 
-            query_response = xml.xpath("//xmlns:IntuitResponse/xmlns:QueryResponse")[0]
+            query_response = xml.xpath("//xmlns:QueryResponse")[0]
             if query_response
 
               start_pos_attr = query_response.attributes['startPosition']
