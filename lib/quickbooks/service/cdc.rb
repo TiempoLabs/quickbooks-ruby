@@ -11,7 +11,7 @@ module Quickbooks
 
       	def fetch_changes(models, start_time)
 	        response = {}
-        	get_response = do_http_get(url_for_cdc(models, start_time))
+        	get_response = do_http_get(url_for_cdc(models, start_time.iso8601))
           change_responses = @last_response_xml.xpath("//xmlns:IntuitResponse/xmlns:CDCResponse")
 
           models.each_index do |index|
