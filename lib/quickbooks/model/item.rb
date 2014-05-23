@@ -58,6 +58,13 @@ module Quickbooks
         super
       end
 
+      def self.service
+        return Quickbooks::Service::Item
+      end
+      def service
+        return self.class.service
+      end
+
       def valid_for_create?
         valid?
         errors.empty?

@@ -33,6 +33,13 @@ module Quickbooks
       validates_presence_of :employee_ref, :if => Proc.new { |ta| ta.name_of == "Employee" }
       validates_presence_of :vendor_ref, :if => Proc.new { |ta| ta.name_of == "Vendor" }
 
+      def self.service
+        return Quickbooks::Service::TimeActivity
+      end
+      def service
+        return self.class.service
+      end
+
       def valid_for_update?
         if sync_token.nil?
           errors.add(:sync_token, "Missing required attribute SyncToken for update")

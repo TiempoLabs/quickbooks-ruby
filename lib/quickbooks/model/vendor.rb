@@ -47,6 +47,13 @@ module Quickbooks
 
       reference_setters :term_ref
 
+      def self.service
+        return Quickbooks::Service::Vendor
+      end
+      def service
+        return self.class.service
+      end
+
     end
   end
 end

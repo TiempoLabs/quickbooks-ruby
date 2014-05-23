@@ -41,6 +41,12 @@ module Quickbooks
       validate :names_cannot_contain_invalid_characters
       validate :email_address_is_valid
 
+      def self.service
+        return Quickbooks::Service::Employee
+      end
+      def service
+        return self.class.service
+      end
 
     end
   end

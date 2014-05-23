@@ -58,6 +58,13 @@ module Quickbooks
 
       reference_setters :parent_ref, :sales_term_ref, :payment_method_ref
 
+      def self.service
+        return Quickbooks::Service::Customer
+      end
+      def service
+        return self.class.service
+      end
+
       def job?
         job.to_s == 'true'
       end
