@@ -1,3 +1,5 @@
+require 'time'
+
 module Quickbooks
   module Model
     class TimeActivity < BaseModel
@@ -13,6 +15,7 @@ module Quickbooks
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
 
+      xml_accessor :time_zone, :from => 'TimeZone'
       xml_accessor :txn_date, :from => 'TxnDate'
       xml_accessor :name_of, :from => 'NameOf'
 
@@ -23,9 +26,15 @@ module Quickbooks
 
       xml_accessor :billable_status, :from => 'BillableStatus'
       xml_accessor :taxable, :from => 'Taxable'
-      xml_accessor :hours, :from => 'Hours', :as => Integer
       xml_accessor :hourly_rate, :from => 'HourlyRate'
+
+      xml_accessor :hours, :from => 'Hours', :as => Integer
       xml_accessor :minutes, :from => 'Minutes', :as => Integer
+      xml_accessor :break_hours, :from => 'BreakHours', :as => Integer
+      xml_accessor :break_minutes, :from => 'BreakMinutes', :as => Integer
+      xml_accessor :start_time, :from => 'StartTime', :as => Time
+      xml_accessor :end_time, :from => 'EndTime', :as => Time
+
       xml_accessor :description, :from => 'Description'
 
       #== Validations
