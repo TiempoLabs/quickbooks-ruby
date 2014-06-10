@@ -9,6 +9,10 @@ module Quickbooks
 
       NAMEOF_OPTIONS = %w( Employee Vendor )
 
+      BILLABLE = "Billable"
+      NOT_BILLABLE = "NotBillable"
+      BILLED = "HasBeenBilled"
+
       xml_name XML_NODE
 
       xml_accessor :id, :from => 'Id', :as => Integer
