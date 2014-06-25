@@ -6,6 +6,33 @@ module Quickbooks
         fetch_collection(object_query, model, options)
       end
 
+      def query_all(object_query = nil)
+        per_page = 250
+        max_pages = 101 # drop out after 25000 results as a fail safe
+
+        page_count = 1
+        start_position = 0
+        query_complete = false
+
+        results = []
+
+        while (!query_complete && (page_count < max_pages))
+          query_response = query(object_query, {:per_page => per_page, :page => page_count})
+          results.concat(query_response.entries)
+          puts "Page #{page_count}: #{query_response.count}"
+
+          # See if this is the final page
+          if (query_response.count < per_page)
+            query_complete = true
+          end
+
+          # Bump the page count as a fail safe for truly mega sets
+          page_count += 1
+        end
+
+        return results
+      end
+
       def fetch_by_id(id, options = {})
         url = "#{url_for_resource(model.resource_for_singular)}/#{id}"
         fetch_object(model, url, options)
