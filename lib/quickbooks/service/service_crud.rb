@@ -19,7 +19,6 @@ module Quickbooks
         while (!query_complete && (page_count < max_pages))
           query_response = query(object_query, {:per_page => per_page, :page => page_count})
           results.concat(query_response.entries)
-          puts "Page #{page_count}: #{query_response.count}"
 
           # See if this is the final page
           if (query_response.count < per_page)
