@@ -64,6 +64,23 @@ module Quickbooks
           false
         end
       end
+
+      def stringify_date_time(entity, field)
+        if (entity && entity.class.method_defined?(field) && entity.send(field))
+          value = entity.send(field)
+          setter_method = "#{field}="
+
+          if (value.is_a?(Time))
+            entity.send(setter_method, value.iso8601)
+          elsif (value.is_a?(Date))
+            value = value.to_time
+            entity.send(setter_method, value.iso8601)
+          end
+        end
+
+        return entity
+      end
+
     end
   end
 end
