@@ -32,6 +32,14 @@ module Quickbooks
       validates_length_of :line_items, :minimum => 1
 
       reference_setters :department_ref, :vendor_ref, :payer_ref, :sales_term_ref
+
+      def self.service
+        return Quickbooks::Service::Bill
+      end
+      def service
+        return self.class.service
+      end
+
     end
   end
 end
